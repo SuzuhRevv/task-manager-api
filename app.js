@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const tasks = require('./routes/tasks.js')
+const { connectDB } = require('./db/connect')
 
 //middleware, usado para pegar os dados em REQ.BODY
 app.use(express.json())
@@ -13,5 +14,16 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/tasks', tasks )
 
+const start = async () => {
+    try {
+       await connectDB(() => {return console.log(`Connected to the database`)})
+       app.listen(port, console.log(`listening on port ${port}...`))
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+start()
+
+
 const port = 3000
-app.listen(port, console.log(`listening on port ${port}...`))
