@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/tasks', tasks )
 
-app.use('/hello', notFound)
+app.use('/api/v1/hello', notFound)
 
 const start = async () => {
     try {
