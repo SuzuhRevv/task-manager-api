@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const tasks = require('./routes/tasks.js')
+const notFound = require('./middleware/not-found.js')
 const { connectDB } = require('./db/connect')
 
 //middleware, usado para pegar os dados em REQ.BODY
@@ -13,6 +14,8 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/v1/tasks', tasks )
+
+app.use('/hello', notFound)
 
 const start = async () => {
     try {
